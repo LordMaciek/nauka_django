@@ -1,19 +1,12 @@
-{% load static %}
-<html>
-    <head>
-      <title>Blog Lorda Maćka</title>
-      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Blog Lorda Maćka</a></h1>
-        </div>
-        {% for post in posts %}
-          <div>
-            <p>published: {{ post.publish }}</p>
-            <h2><a href="">{{ post.title }}</a></h2>
-            <p>{{ post.body|linebreaksbr }}</p>
-          </div>
-          {% endfor %}
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+      <div class="date">
+        {{ post.publish }}
+      </div>
+      <p>{{ post.body|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
